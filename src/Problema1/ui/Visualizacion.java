@@ -7,9 +7,6 @@ import java.util.ArrayList;
 
 public class Visualizacion {
 
-    // ─── PRENDA ──────────────────────────────────────────────────
-
-    // equivalente a visualizaAlumno() del base
     public void visualizaPrenda(Prenda prenda) {
         StringBuffer buffer = new StringBuffer();
         buffer.append(String.format("%04d  ", prenda.getNumeroPrenda()));
@@ -21,24 +18,20 @@ public class Visualizacion {
         System.out.println(buffer.toString());
     }
 
-    // equivalente a visualizaEncabezado() del base
     public void encabezadoPrendas() {
-        System.out.println("─────────────────────────────────────────────────────────────");
+        System.out.println("─────────────────────────────────────────────────────────────────");
         System.out.printf("%-4s  %-15s %-12s %-8s  %-10s %-10s%n",
                 "No", "Modelo", "Tela", "Costo", "Género", "Temporada");
-        System.out.println("─────────────────────────────────────────────────────────────");
+        System.out.println("─────────────────────────────────────────────────────────────────");
     }
 
-    // equivalente a visualizaTodos() del base
     public void visualizaTodosPrendas(ArrayList<Prenda> prendas) {
         encabezadoPrendas();
         for (Prenda prenda : prendas)
             visualizaPrenda(prenda);
-        System.out.println("─────────────────────────────────────────────────────────────");
+        System.out.println("─────────────────────────────────────────────────────────────────");
         System.out.println("Total de prendas: " + prendas.size());
     }
-
-    // ─── LOTE ────────────────────────────────────────────────────
 
     public void visualizaLote(Lote lote) {
         StringBuffer buffer = new StringBuffer();
@@ -68,9 +61,6 @@ public class Visualizacion {
         System.out.println("Total de lotes: " + lotes.size());
     }
 
-    // ─── LOTES DE UNA PRENDA ESPECÍFICA ──────────────────────────
-
-    // nuevo respecto al base — muestra solo los lotes de una prenda
     public void visualizaLotesDePrenda(Prenda prenda, ArrayList<Lote> lotes) {
         System.out.println("\nLotes de la prenda: "
                 + prenda.getNumeroPrenda()

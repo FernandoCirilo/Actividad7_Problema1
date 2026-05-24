@@ -20,13 +20,10 @@ public class Principal {
         input         = new Scanner(System.in);
         validacion    = new Validacion(input);
         visualizacion = new Visualizacion();
-        fabrica       = new Fabrica("Textiles del Sur");
+        fabrica       = new Fabrica("Textiles");
         creaMenu();
     }
 
-    // ─── MENÚ ─────────────────────────────────────────────────────
-
-    // equivalente a creaMenu() del base
     private void creaMenu() {
         menu  = "\n╔══════════════════════════════╗\n";
         menu += "║      FÁBRICA DE ROPA         ║\n";
@@ -52,9 +49,6 @@ public class Principal {
         return (byte) validacion.leerLong(menu, 1, 9, "Opción inválida!!");
     }
 
-    // ─── OPERACIONES DE PRENDA ────────────────────────────────────
-
-    // equivalente a agregarAlumno() del base
     private void agregarPrenda() {
         Prenda prenda = validacion.leerPrenda();
         if (prenda == null) return;
@@ -66,22 +60,19 @@ public class Principal {
         }
     }
 
-    // equivalente a eliminarAlumno() del base
-    // pero con aviso de cascada antes de confirmar
     private void eliminarPrenda() {
         int numeroPrenda = validacion.leerNumeroPrenda();
-        Prenda prenda    = fabrica.getPrenda(numeroPrenda);
+        Prenda prenda = fabrica.getPrenda(numeroPrenda);
 
         if (prenda == null) {
             System.err.println("La prenda no existe!!");
             return;
         }
 
-        // muestra la prenda
         visualizacion.encabezadoPrendas();
         visualizacion.visualizaPrenda(prenda);
 
-        // muestra los lotes que se eliminarán en cascada
+        // muestra los lotes que se eliminarán
         ArrayList<Lote> lotesAsociados = fabrica.getLotesDePrenda(numeroPrenda);
         if (!lotesAsociados.isEmpty()) {
             System.out.println("\nATENCIÓN — Se eliminarán también estos lotes:");
@@ -90,7 +81,7 @@ public class Principal {
             System.out.println("Esta prenda no tiene lotes asociados.");
         }
 
-        // confirmación — igual que el base
+        // confirmación
         boolean confirma = validacion.leerBoolean(
                 "\n¿Confirmar eliminación? [Si/No]: ",
                 "Si", "No", "Escribe Si o No!!");
@@ -107,10 +98,9 @@ public class Principal {
         }
     }
 
-    // equivalente a modificaAlumno() del base
     private void modificarPrenda() {
         int numeroPrenda = validacion.leerNumeroPrenda();
-        Prenda prenda    = fabrica.getPrenda(numeroPrenda);
+        Prenda prenda = fabrica.getPrenda(numeroPrenda);
 
         if (prenda == null) {
             System.err.println("La prenda no existe!!");
@@ -120,14 +110,14 @@ public class Principal {
         visualizacion.encabezadoPrendas();
         visualizacion.visualizaPrenda(prenda);
 
-        String menuMod  = "\nMenú de modificación\n";
-        menuMod += "1.- Modificar modelo\n";
-        menuMod += "2.- Modificar tela\n";
-        menuMod += "3.- Modificar género\n";
-        menuMod += "4.- Modificar temporada\n";
-        menuMod += "Indica opción [1..4]: ";
+        String menuModificacion  = "\nMenú de modificación\n";
+        menuModificacion += "1.- Modificar modelo\n";
+        menuModificacion += "2.- Modificar tela\n";
+        menuModificacion += "3.- Modificar género\n";
+        menuModificacion += "4.- Modificar temporada\n";
+        menuModificacion += "Indica opción [1..4]: ";
 
-        byte opcion = (byte) validacion.leerLong(menuMod, 1, 4, "Opción inválida!!");
+        byte opcion = (byte) validacion.leerLong(menuModificacion, 1, 4, "Opción inválida!!");
 
         switch (opcion) {
             case 1: prenda.setModelo(validacion.leerModelo());       break;
@@ -138,7 +128,7 @@ public class Principal {
         System.out.println("Prenda modificada correctamente.");
     }
 
-    // muestra la prenda y todos sus lotes asociados
+    // muestra la prenda y todos sus lotes
     private void consultarPrenda() {
         int numeroPrenda = validacion.leerNumeroPrenda();
         Prenda prenda    = fabrica.getPrenda(numeroPrenda);
@@ -165,8 +155,6 @@ public class Principal {
         }
         visualizacion.visualizaTodosPrendas(fabrica.getPrendas());
     }
-
-    // ─── OPERACIONES DE LOTE ──────────────────────────────────────
 
     private void agregarLote() {
         Lote lote = validacion.leerLote(fabrica);
@@ -215,9 +203,6 @@ public class Principal {
         visualizacion.visualizaTodosLotes(fabrica.getLotes());
     }
 
-    // ─── RUN ──────────────────────────────────────────────────────
-
-    // equivalente a run() del base
     public void run() {
         byte opcion;
         do {
@@ -234,7 +219,7 @@ public class Principal {
             }
         } while (opcion != 9);
 
-        // guarda al salir — igual que el base
+        // guarda al salir
         try {
             fabrica.salvarDatos();
             System.out.println("Datos guardados correctamente.");

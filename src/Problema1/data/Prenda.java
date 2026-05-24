@@ -76,7 +76,6 @@ public class Prenda implements Comparable<Prenda> {
         return this.temporada.compareTo(otra.temporada);
     }
 
-
     public static class ComparadorPrendaPorCosto implements Comparator<Prenda> {
         @Override
         public int compare(Prenda a, Prenda b) {
@@ -90,16 +89,11 @@ public class Prenda implements Comparable<Prenda> {
         }
     }
 
-    public Object toCSV() {
+    public String toCSV(){
         return String.format("%d,%s,%s,%.2f,%s,%s,%.2f",
                 numeroPrenda, modelo, tela, costoProduccion,
                 genero, temporada, costoMaximo);
     }
-    /*public String toCSV{
-        return String.format("%d,%s,%s,%.2f,%s,%s,%.2f",
-                numeroPrenda, modelo, tela, costoProduccion,
-                genero, temporada, costoMaximo);
-    }*/
 
     @Override
     public String toString() {

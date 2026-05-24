@@ -23,13 +23,10 @@ public class Fabrica {
         recuperarDatos();
     }
 
-    // ─── PERSISTENCIA ────────────────────────────────────────────
-
-    // igual que ListaAlumnos — primero prendas, luego lotes
     private void recuperarDatos() {
         try {
             prendas = gp.leerDatos();
-            lotes   = gl.leerDatos(prendas);  // necesita prendas ya cargadas
+            lotes   = gl.leerDatos(prendas);
         } catch (FileNotFoundException e) {
             prendas = new ArrayList<>();
             lotes   = new ArrayList<>();
@@ -42,19 +39,10 @@ public class Fabrica {
         gl.guardaDatos(lotes);
     }
 
-    // ─── VERIFICACIONES ──────────────────────────────────────────
-
-    // equivalente a existe(Alumno) de ListaAlumnos
+    // Confirmacion de existencia de prenda
     public boolean existePrenda(Prenda prenda) {
         for (Prenda p : prendas)
             if (p.getNumeroPrenda() == prenda.getNumeroPrenda())
-                return true;
-        return false;
-    }
-
-    public boolean existePrenda(int numeroPrenda) {
-        for (Prenda p : prendas)
-            if (p.getNumeroPrenda() == numeroPrenda)
                 return true;
         return false;
     }
@@ -66,9 +54,6 @@ public class Fabrica {
         return false;
     }
 
-    // ─── GETTERS ─────────────────────────────────────────────────
-
-    // equivalente a getAlumno(long) de ListaAlumnos
     public Prenda getPrenda(int numeroPrenda) {
         for (Prenda p : prendas)
             if (p.getNumeroPrenda() == numeroPrenda)
@@ -95,9 +80,7 @@ public class Fabrica {
         return resultado;
     }
 
-    // ─── AGREGAR ─────────────────────────────────────────────────
-
-    // equivalente a addAlumno() de ListaAlumnos
+    // Agregamos una prenda
     public void agregaPrenda(Prenda prenda) {
         if (prenda == null)
             throw new IllegalArgumentException("La prenda es inválida!!");
@@ -106,7 +89,7 @@ public class Fabrica {
         prendas.add(prenda);
     }
 
-    // el lote solo se agrega si su prenda ya existe — regla de negocio clave
+    // El lote solo se agrega si la prenda ya existe
     public void agregaLote(Lote lote) {
         if (lote == null)
             throw new IllegalArgumentException("El lote es inválido!!");
@@ -117,24 +100,14 @@ public class Fabrica {
         lotes.add(lote);
     }
 
-    // ─── ELIMINAR ────────────────────────────────────────────────
-
-    // equivalente a deleteAlumno() de ListaAlumnos
-    // pero con cascada — elimina primero todos los lotes de la prenda
+    // Se eliminan primero todos los lotes de la prenda
     public void eliminaPrenda(Prenda prenda) {
         if (!existePrenda(prenda))
             throw new IllegalArgumentException("La prenda no existe!!");
-        // cascada — igual que la regla del enunciado
+
         lotes.removeIf(l -> l.getPrendaLote().getNumeroPrenda()
                 == prenda.getNumeroPrenda());
         prendas.remove(prenda);
-    }
-
-    public void eliminaPrenda(int numeroPrenda) {
-        Prenda prenda = getPrenda(numeroPrenda);
-        if (prenda == null)
-            throw new IllegalArgumentException("La prenda no existe!!");
-        eliminaPrenda(prenda);
     }
 
     public void eliminaLote(Lote lote) {
@@ -143,20 +116,11 @@ public class Fabrica {
         lotes.remove(lote);
     }
 
-    public void eliminaLote(int numeroLote) {
-        Lote lote = getLote(numeroLote);
-        if (lote == null)
-            throw new IllegalArgumentException("El lote no existe!!");
-        lotes.remove(lote);
-    }
-
-    // ─── CONTEOS ─────────────────────────────────────────────────
-
     public int cantidadDePrendas() { return prendas.size(); }
     public int cantidadDeLotes()   { return lotes.size();   }
 
-    // ─── VISUALIZACIÓN ───────────────────────────────────────────
 
+    //posobles formas de mostrar las prendas
     public void mostrarPrendas() {
         System.out.println("--- Prendas en la fábrica ---");
         for (int i = 0; i < prendas.size(); i++)

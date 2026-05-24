@@ -10,7 +10,6 @@ import Problema1.excepciones.ExcepcionDeNumeroDePiezasInvalido;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Validacion {
@@ -20,8 +19,6 @@ public class Validacion {
     public Validacion(Scanner input) {
         this.input = input;
     }
-
-    // ─── MÉTODOS GENÉRICOS — vienen del proyecto base ────────────
 
     public long leerLong(String texto, long min, long max, String error) {
         long valor;
@@ -86,9 +83,6 @@ public class Validacion {
         return valor.equalsIgnoreCase(verdadero);
     }
 
-    // ─── FECHA ───────────────────────────────────────────────────
-
-    // nuevo respecto al base — Alumno no tenía fechas
     public LocalDate leerFecha() {
         LocalDate fecha = null;
         do {
@@ -102,13 +96,10 @@ public class Validacion {
         return fecha;
     }
 
-    // ─── ENUMERADOS ──────────────────────────────────────────────
-
-    // igual que leerGenero() del base pero con los enumerados propios
     public Genero leerGenero() {
         String[] opciones = {"Masculino", "Femenino", "Mixto"};
         String valor = leerString(
-                "Proporciona género [MASCULINO/FEMENINO/MIXTO]: ",
+                "Proporciona género [Masculino/Femenino/Mixto]: ",
                 opciones, "Género inválido!!");
         return Genero.valueOf(valor);
     }
@@ -116,12 +107,10 @@ public class Validacion {
     public Temporada leerTemporada() {
         String[] opciones = {"Primavera", "Verano", "Otoño", "Invierno"};
         String valor = leerString(
-                "Proporciona temporada [PRIMAVERA/VERANO/OTOÑO/INVIERNO]: ",
+                "Proporciona temporada [Primavera/Verano/Otoño/Invierno]: ",
                 opciones, "Temporada inválida!!");
         return Temporada.valueOf(valor);
     }
-
-    // ─── IDENTIFICADORES ─────────────────────────────────────────
 
     public int leerNumeroPrenda() {
         return (int) leerLong(
@@ -135,22 +124,22 @@ public class Validacion {
                 1, 9999, "Número de lote inválido!!");
     }
 
-    // ─── ATRIBUTOS DE PRENDA ─────────────────────────────────────
 
     public String leerModelo() {
-        return leerString("Proporciona modelo: ", null, "Modelo inválido!!");
+        return leerString("Proporciona el modelo: ", null, "Modelo inválido!!");
     }
 
     public String leerTela() {
-        String[] telas = {"ALGODÓN", "POLIÉSTER", "LINO", "SEDA", "LANA"};
+        return leerString("Proporciona la tela: ", null, "Tela invalida");
+        /*String[] telas = {"ALGODÓN", "POLIÉSTER", "LINO", "SEDA", "LANA"};
         return leerString(
                 "Proporciona tela [ALGODÓN/POLIÉSTER/LINO/SEDA/LANA]: ",
-                telas, "Tela inválida!!");
+                telas, "Tela inválida!!");*/
     }
 
     public float leerCostoProduccion(float costoMaximo) {
         return leerFlotante(
-                "Proporciona costo de producción [0.01 - " + costoMaximo + "]: ",
+                "Proporciona el costo de producción [0.01 - " + costoMaximo + "]: ",
                 0.01f, costoMaximo, "Costo inválido!!");
     }
 
@@ -172,12 +161,12 @@ public class Validacion {
 
     // equivalente a leerAlumno() del base
     public Prenda leerPrenda() {
-        int numeroPrenda   = leerNumeroPrenda();
-        String modelo      = leerModelo();
-        String tela        = leerTela();
-        float costoMaximo  = leerCostoMaximo();
-        float costo        = leerCostoProduccion(costoMaximo);
-        Genero genero      = leerGenero();
+        int numeroPrenda = leerNumeroPrenda();
+        String modelo = leerModelo();
+        String tela = leerTela();
+        float costoMaximo = leerCostoMaximo();
+        float costo = leerCostoProduccion(costoMaximo);
+        Genero genero = leerGenero();
         Temporada temporada = leerTemporada();
         try {
             return new Prenda(numeroPrenda, modelo, tela, costo,

@@ -32,13 +32,12 @@ public class GestionLotes {
     private Lote procesaDatos(String linea, ArrayList<Prenda> prendas)
             throws ExcepcionDeNumeroDePiezasInvalido {
         Scanner sc = new Scanner(linea).useDelimiter(",");
-        int numeroLote   = sc.nextInt();
-        int numeroPieza  = sc.nextInt();
-        LocalDate fecha  = LocalDate.parse(sc.next());
-        int numeroPrenda = sc.nextInt();   // ← referencia a la prenda
+        int numeroLote = sc.nextInt();
+        int numeroPieza = sc.nextInt();
+        LocalDate fecha = LocalDate.parse(sc.next());
+        int numeroPrenda = sc.nextInt();
         sc.close();
 
-        // busca la prenda en la lista ya cargada
         Prenda prenda = null;
         for (Prenda p : prendas)
             if (p.getNumeroPrenda() == numeroPrenda) {

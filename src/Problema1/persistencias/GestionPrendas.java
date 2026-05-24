@@ -31,12 +31,12 @@ public class GestionPrendas {
 
     private Prenda procesaDatos(String linea) throws ExcepcionDeCostoFueraDeLimite {
         Scanner sc = new Scanner(linea).useDelimiter(",");
-        int numeroPrenda  = sc.nextInt();
-        String modelo     = sc.next();
-        String tela       = sc.next();
-        float costo       = sc.nextFloat();
-        Genero genero     = Genero.valueOf(sc.next());
-        Temporada temporada    = Temporada.valueOf(sc.next());
+        int numeroPrenda = sc.nextInt();
+        String modelo = sc.next();
+        String tela = sc.next();
+        float costo = sc.nextFloat();
+        Genero genero = Genero.valueOf(sc.next());
+        Temporada temporada = Temporada.valueOf(sc.next());
         float costoMaximo = sc.nextFloat();
         sc.close();
         return new Prenda(numeroPrenda, modelo, tela, costo, genero, temporada, costoMaximo);

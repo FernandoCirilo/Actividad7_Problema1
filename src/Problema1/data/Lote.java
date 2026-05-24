@@ -25,6 +25,30 @@ public class Lote implements Comparable<Lote>{
         this.prendaLote = prendaLote;
     }
 
+    public Prenda getPrendaLote() {return prendaLote;}
+    public int getNumeroLote() {return numeroLote;}
+    public int getNumeroPieza() {return numeroPieza;}
+    public LocalDate getFechaFabricacion() {return fechaFabricacion;}
+
+    public float getCalcularCostoProduccionLote(){
+        float productoLote=0;
+        productoLote = numeroPieza * prendaLote.getCostoProduccion();
+        return productoLote;
+    }
+
+    public float getCalcularPrecioVentaPieza(){
+        float costoProduccion = 0;
+        costoProduccion = prendaLote.getCostoProduccion() * 1.15f;
+        return costoProduccion;
+    }
+
+    public float getCalcularGananciaVentaLote(){
+        float gananciaVenta = 0;
+        float precioPrendaLote = prendaLote.getCostoProduccion() * 0.05f;
+        gananciaVenta = precioPrendaLote * numeroPieza;
+        return gananciaVenta;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -66,31 +90,6 @@ public class Lote implements Comparable<Lote>{
         public int compare(Lote a, Lote b) {
             return a.getFechaFabricacion().compareTo(b.getFechaFabricacion());
         }
-    }
-
-    public Prenda getPrendaLote() {return prendaLote;}
-    public int getNumeroLote() {return numeroLote;}
-    public int getNumeroPieza() {return numeroPieza;}
-    public LocalDate getFechaFabricacion() {return fechaFabricacion;}
-
-
-    public float getCalcularCostoProduccionLote(){
-        float productoLote=0;
-        productoLote = numeroPieza * prendaLote.getCostoProduccion();
-        return productoLote;
-    }
-
-    public float getCalcularPrecioVentaPieza(){
-        float costoProduccion = 0;
-        costoProduccion = prendaLote.getCostoProduccion() * 1.15f;
-        return costoProduccion;
-    }
-
-    public float getCalcularGananciaVentaLote(){
-        float gananciaVenta = 0;
-        float precioPrendaLote = prendaLote.getCostoProduccion() * 0.05f;
-        gananciaVenta = precioPrendaLote * numeroPieza;
-        return gananciaVenta;
     }
 
     public String toCSV() {
